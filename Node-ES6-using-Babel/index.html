@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Node ES6 ( Babel )</title>
+		<style>
+			body { font-family: Arial; font-size: 14px; }
+			code { background-color: #EEE; border: 1px solid #CCC; padding: 2px;}
+			pre { background-color: #EEE; border: 1px solid #CCC; padding: 10px; border-radius: 3px; }
+			</style>
+	</head>
+	<body>
+		<p><strong>Example to use ES6 ( using Babel ) in Node.js</strong></p>
+		
+		<p>Add following to <code>package.json</code> file</p>
+<pre>"scripts": {
+	"build": "babel src -d build",
+	"serve": "node build/main"
+},</pre>
+		<p>First Run <code>npm run build</code> command in command promt.</p>
+		<p>Above command will compile/transform ES6 files from "src" folder to ES5 files and will copy it in to build folder</p>
+		<p>Then run <code>npm serve</code> It will run compiled ES6 file named main.js from build folder</p>
+		<p>/build/main.js file has http server code and it will start simple node HTTP server</p>
+		<p>now open the browser and open http://localhost:3000/</p>
+	</body>
+</html>			
