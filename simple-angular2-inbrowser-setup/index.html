@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Angular 2 without node</title>
+		<script src="system.src.js"></script>
+		<script src="typescript.js"></script>	
+		<script src="system.config.js"></script>
+		<style>
+			body { font-family: Arial; font-size: 14px; }
+			code { background-color: #EEE; border: 1px solid #CCC; padding: 2px;}
+			pre { background-color: #EEE; border: 1px solid #CCC; padding: 10px; border-radius: 3px; }
+		</style>
+	</head>
+	
+	<!-- 3. Display the application -->
+	<body>
+		<my-app>Loading...</my-app>
+		
+		<h1>Angular 2 inbrowser example</h1>
+		<p>First download system.src.js and typescript.js</p>
+		<p>create system.config.js file and put below given code in it</p>
+		<pre>
+// system.config.js
+//===============================
+System.config({
+    baseUrl: '/',
+    paths: {
+        'unpkg:*': 'https://unpkg.com/*'
+    }
+});
+
+System.config({
+    transpiler: 'typescript',
+    typescriptOptions: { emitDecoratorMetadata: true },
+
+    meta: {
+        '*': {
+            deps: [ 'zone.js', 'reflect-metadata' ]
+        }
+    }
+});
+
+System.config({
+	// map tells the System loader where to look for things
+	map: {
+		'app' : 'app',
+		'rxjs': 'app/rxjs',
+		'zone.js': 'zone.js.0.6.25.js',
+		'reflect-metadata': 'reflect-metadata.0.1.8.js',
+		'@angular': 'app/angular2',
+		"crypto": "@empty"
+    },
+	
+	// packages tells the System loader how to load when no filename and/or no extension
+    packages: {
+		'app': {
+			defaultExtension: 'ts',
+			main: './index.ts'
+		},
+		'@angular/core'                    : {main: 'core@2.0.0.js', defaultExtension: 'js'},
+		'@angular/common'                  : {main: 'common@2.0.0.js'},
+		'@angular/compiler'                : {main: 'compiler@2.0.0.js'},
+		'@angular/platform-browser'        : {main: 'platform-browser@2.0.0.js'},
+		'@angular/platform-browser-dynamic': {main: 'platform-browser-dynamic@2.0.0.js'}
+    }
+});</pre>
+		<p>Download rxjs from Github, extract it and place it inside App folder</p>
+		<p> map diffrent files and folder in system.config.js using map: {} object</p>
+		<p>download rxjs, zone.js.0.6.25.js, reflect-metadata.0.1.8.js and Angular2 related JS files and call it inside system.config.js file</p>
+		<p>Creat "app" folder and create index.ts, app.module.ts and app.component.ts files</p>
+		<pre>
+// index.ts
+//=========================
+		
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app.module';
+
+const platform = platformBrowserDynamic();
+
+platform.bootstrapModule(AppModule);
+</pre>
+
+<pre>
+// app.module.ts
+//=========================
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent }   from './app.component';
+
+@NgModule({
+	imports:      [ BrowserModule ],
+	declarations: [ AppComponent ],
+	bootstrap:    [ AppComponent ]
+})
+export class AppModule { }
+</pre>
+
+<pre>
+// app.component.ts
+//=========================	
+import { Component } from '@angular/core';
+
+@Component({
+	selector: 'my-app',
+	template: '&lt;h1>My First Angular App&lt;/h1>'
+})
+export class AppComponent { }
+</pre>
+
+<p>Create one server.js file for simple Node.js HTTP server, because Angular 2 will not load files directly in browser, it will server files through HTTP server. So for that we have created simple node.js HTTP server</p>
+<p>Start server using node server.js command in command prompt and in broser open http://localhost:3000/</p>
+
+		<script>
+			System.import('app');			
+		</script>
+	</body>
+	
+</html>
