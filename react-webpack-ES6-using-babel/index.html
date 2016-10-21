@@ -19,9 +19,9 @@
 		<p><strong>Babel</strong><br/> <code>npm install babel-cli bable-loader babel-core babel-preset-es2015 babel-preset-react --save-dev</code></p>
 		<p><strong>webpack</strong><br/> <code>npm install webpack --save-dev</code></p>
 		<p><strong>package.json</strong></p>
-		<p>in <code>package.json</code> file in script block add <code>"webpack": "webpack --watch",</code> then in command prompt run <code>npm run webpack</code>. this will tell webpack.config.js file to watch changes in main.js in /src/ folder and will bundle main.js and all the imported files ( using babel-loader ) into a single file named bundle.js and will put it inside /build/ folder</p>
+		<p>in <code>package.json</code> file in script block add <code>"webpack": "webpack --watch",</code> then in command prompt run <code>npm run webpack</code>. this will tell webpack.config.js file to watch changes in all the files of /src/ folder and will bundle main.js and all the imported files ( using babel-loader ) into a single file named bundle.js and will put it inside /build/ folder</p>
 		<p><code>"build:webpack": "webpack --config webpack.config.js"</code> is used to bundle all React files in one bundle.</p>
-		<p>If you want to transpile your ES6 code to ES5 then use <code>"build": "babel src -d build"</code>. In Command prompt run <code>npm run babel</code>. This command will transpile all the files available in src folder and will put it inside build folder.</p>
+		<p>If you want to transpile your ES6 code to ES5 then use <code>"build": "babel src -d build"</code>. In Command prompt run <code>npm run build</code>. This command will transpile all the files available in src folder and will put it inside build folder.</p>
 <pre>
 // package.json
 //====================================
