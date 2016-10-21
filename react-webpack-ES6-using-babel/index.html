@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>React Webpack ES6 ( Babel )</title>
+		<style>
+			body { font-family: Arial; font-size: 14px; line-height: 1.8 }
+			code { background-color: #EEE; border: 1px solid #CCC; padding: 2px;}
+			pre { background-color: #EEE; border: 1px solid #CCC; padding: 10px; border-radius: 3px; }
+			#app { border: 1px solid green; padding: 2em; text-align: center; }
+		</style>
+	</head>
+	<body>
+		<p><strong>React Webpack ES6 ( Babel ) Example</strong></p>
+		<p>This example shows React using ES6 ( Webpack for bundling transpiled JS files using Babel )</p>
+		<p>First create package.json file</p>
+		<p><strong>React</strong><br/> <code>npm install react react-dom --save</code></p>
+		<p><strong>Babel</strong><br/> <code>npm install babel-cli bable-loader babel-core babel-preset-es2015 babel-preset-react --save-dev</code></p>
+		<p><strong>webpack</strong><br/> <code>npm install webpack --save-dev</code></p>
+		<p><strong>package.json</strong></p>
+		<p>in <code>package.json</code> file in script block add <code>"webpack": "webpack --watch",</code> then in command prompt run <code>npm run webpack</code>. this will tell webpack.config.js file to watch changes in main.js in /src/ folder and will bundle main.js and all the imported files ( using babel-loader ) into a single file named bundle.js and will put it inside /build/ folder</p>
+		<p><code>"build:webpack": "webpack --config webpack.config.js"</code> is used to bundle all React files in one bundle.</p>
+		<p>If you want to transpile your ES6 code to ES5 then use <code>"build": "babel src -d build"</code>. In Command prompt run <code>npm run babel</code>. This command will transpile all the files available in src folder and will put it inside build folder.</p>
+<pre>
+// package.json
+//====================================
+
+{
+	"name": "react_webpack_es6_example",
+	"dependencies": {
+		"react": "^15.3.2",
+		"react-dom": "^15.3.2"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.16.0",
+		"babel-core": "^6.17.0",
+		"babel-loader": "^6.2.5",
+		"babel-preset-es2015": "^6.16.0",
+		"babel-preset-react": "^6.16.0",
+		"webpack": "^1.13.2"
+	},
+	"scripts": {
+		"compile": "babel-node server",
+		"webpack": "webpack --watch",
+		"build": "babel src -d build",
+		"serve": "node build/test1",
+		"build:webpack": "webpack --config webpack.config.js"
+	},
+	"babel": {
+		"presets": [
+			"es2015",
+			"react"
+		]
+	}
+}</pre>
+
+		<pre>
+// webpack.config.js
+//=======================================
+
+var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+	  entry: './src/main.js',
+	  output: { path: __dirname +"/build/", filename: 'bundle.js' },
+	  module: {
+		    loaders: [
+			{
+				test: /.jsx?$/, // /\.js$/
+				loader: 'babel', // 'babel-loader' is also a valid name to reference
+				exclude: /(node_modules|bower_components)/,
+				query: {
+					presets: ['es2015', 'react']
+				}
+			}
+		]
+	  },
+};</pre>
+		<p>webpack.config.js file will first transform main.js file and all imported files in it from "src" folder using Babel-loader.</p>
+		<p>It will create one single file named bundle.js and will put it that single file in "build" folder.</p>
+		
+		<h3>React Output:</h3>
+		<div id="app"></div>
+		
+		<script src="build/bundle.js"></script>
+	</body>
+</html>			
