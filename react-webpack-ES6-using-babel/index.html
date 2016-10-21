@@ -7,6 +7,7 @@
 			body { font-family: Arial; font-size: 14px; line-height: 1.8 }
 			code { background-color: #EEE; border: 1px solid #CCC; padding: 2px;}
 			pre { background-color: #EEE; border: 1px solid #CCC; padding: 10px; border-radius: 3px; }
+			.note { background-color: #f9f9de; border: 1px solid #f99139; padding: 2em; }
 			#app { border: 1px solid green; padding: 2em; text-align: center; }
 		</style>
 	</head>
@@ -79,7 +80,14 @@ module.exports = {
 };</pre>
 		<p>webpack.config.js file will first transform main.js file and all imported files in it from "src" folder using Babel-loader.</p>
 		<p>It will create one single file named bundle.js and will put it that single file in "build" folder.</p>
-		
+		<div class="note"><strong>Note:</strong><br/>
+			<p>React will be served in browser using <code>Webpack+Babel</code>. Webpack will compile React files into single <code>bundle.js</code> file which we will include in index.html. </p>
+			
+			<p>While other Node.js code will be served using Node.js and NPM. Ex. server.js will be started using Node.js. Node.js v6.x supports many ES6 features. You can write ES6 code in node.js v6.x and for that you don't need Bable transpiler. But Currently node.js is not supporting some of the ES6 like <code>import</code> and <code>export</code> statements.If you want to use that features then use Babel.</p>
+			
+			<p>To use ES6 features which are not implemented in Node.js use Babel to transform ES6 code to ES5 using NPM script command <code>"build": "babel src -d build"</code> then in command prompt execute <code>npm run build</code>. this command will transform all ES6 files to ES5 which Browser and Node.js can understand.</p>
+			<p>Ex. <code>import http from 'http'</code> statement will be converted to <code>var http = require('http')</code></p>
+			</div>
 		<h3>React Output:</h3>
 		<div id="app"></div>
 		
